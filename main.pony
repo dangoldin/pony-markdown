@@ -1,4 +1,5 @@
 use "options"
+use "files"
 
 actor Main
     new create(env: Env) =>
@@ -27,3 +28,13 @@ actor Main
         end
 
         env.out.print(inputFileName + " => " + outputFileName)
+
+        try
+            let auth = env.root as AmbientAuth
+            let inputFile = recover File(FilePath(auth, inputFileName)?) end
+            let reader = Reader(consume inputFile)
+            let outputFile = recover File(FilePath(auth, outputFileName)?) end
+            let writer = Writer(consume outputFile)
+        else
+            env.err.print("Couldn't open files")
+        end
