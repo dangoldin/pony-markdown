@@ -13,3 +13,6 @@ actor Reader
         while _file.errno() is FileOK do
             _buffer.append(_file.read(1024))
         end
+
+    be getText() =>
+        String.from_array(_buffer)
