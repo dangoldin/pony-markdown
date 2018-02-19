@@ -36,7 +36,7 @@ actor Main
             let outputFile = recover File(FilePath(auth, outputFileName)?) end
             let writer = Writer(consume outputFile)
 
-            reader.read()
+            env.out.print(reader.read())
         else
             env.err.print("Couldn't open files")
         end
