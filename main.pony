@@ -35,8 +35,11 @@ actor Main
             let reader = Reader(consume inputFile)
             let outputFile = recover File(FilePath(auth, outputFileName)?) end
             let writer = Writer(consume outputFile)
+            let out = env.out
 
-            env.out.print(reader.read())
+            reader.read({(value: String)(out) =>
+                out.print("The value of y is " + value.string())
+                } val)
         else
             env.err.print("Couldn't open files")
         end
