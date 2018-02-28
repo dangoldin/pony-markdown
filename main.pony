@@ -38,7 +38,7 @@ actor Main
             let out = env.out
 
             reader.read({(value: String)(out) =>
-                out.print("The value of y is " + value.string())
+                out.print("File contents:\n" + value.string())
                 } val)
         else
             env.err.print("Couldn't open files")
