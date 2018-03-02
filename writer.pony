@@ -1,4 +1,5 @@
 use "files"
+use "regex"
 
 actor Writer
     let _file: File

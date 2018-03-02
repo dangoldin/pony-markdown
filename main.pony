@@ -37,8 +37,9 @@ actor Main
             let writer = Writer(consume outputFile)
             let out = env.out
 
-            reader.read({(value: String)(out) =>
+            reader.read({(value: String)(out, writer) =>
                 out.print("File contents:\n" + value.string())
+                writer.write(value.string())
                 } val)
         else
             env.err.print("Couldn't open files")
