@@ -12,4 +12,5 @@ actor Reader
             buffer.append(_file.read(1024))
         end
         let s = String.from_array(consume buffer)
-        fn(s)
+        let m = Markdown
+        fn(m.markdownToHTML(s))
