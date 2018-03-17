@@ -36,11 +36,11 @@ actor Main
             let outputFile = recover File(FilePath(auth, outputFileName)?) end
             let writer = Writer(consume outputFile)
             let out = env.out
+            let md = Markdown
 
-            reader.read({(value: String)(out, writer) =>
-                out.print("File contents:\n" + value.string())
-                writer.write(value.string())
-                } val)
+            let s  = reader.read()
+            let s' = md.markdownToHTML(s)
+            writer.write(s')
         else
             env.err.print("Couldn't open files")
         end

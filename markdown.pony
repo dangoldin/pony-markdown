@@ -1,11 +1,14 @@
 use "regex"
 
 class Markdown
-    fun markdownToHTML(it: String): String =>         
+    fun doBold(it: String): String =>
         try
-            // let boldR = Regex("\\*.*?\\*")?
-            let boldR = Regex("(\\*|_)(.*?)\\1")?
-            boldR.replace(it, "<em>\\2</em>")?
+            let boldR = Regex("\\*(.*?)\\*")?
+            let matched = boldR(it)?
+            boldR.replace(it, "<em>" + matched(1)? + "</em>")?
         else
             it
         end
+
+    fun markdownToHTML(it: String): String =>
+        doBold(it)
