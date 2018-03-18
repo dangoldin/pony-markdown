@@ -1,11 +1,18 @@
 use "regex"
+use "collections/persistent"
 
 class Markdown
+    let _markdownRegexMap: Map[Regex, String]
+
+    new create() =>
+        _markdownRegexMap = Map[Regex, String].concat([
+            (Regex("(\\*)(.*?)(\\*)"), "<em>$2</em>")
+            ].values())
+
     fun doBold(it: String): String =>
         try
-            let boldR = Regex("\\*(.*?)\\*")?
-            let matched = boldR(it)?
-            boldR.replace(it, "<em>" + matched(1)? + "</em>")?
+            let boldR = Regex("(\\*)(.*?)(\\*)")?
+            boldR.replace(it, "<em>$2</em>")?
         else
             it
         end
