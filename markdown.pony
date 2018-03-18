@@ -2,11 +2,11 @@ use "regex"
 use "collections/persistent"
 
 class Markdown
-    let _markdownRegexMap: Map[Regex, String]
+    let _markdownRegexMap: Map[String, String]
 
     new create() =>
-        _markdownRegexMap = Map[Regex, String].concat([
-            (Regex("(\\*)(.*?)(\\*)"), "<em>$2</em>")
+        _markdownRegexMap = Map[String, String].concat([
+            ("(\\*)(.*?)(\\*)", "<em>$2</em>")
             ].values())
 
     fun doBold(it: String): String =>
